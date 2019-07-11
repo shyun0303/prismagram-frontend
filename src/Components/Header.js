@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import useInput from "../Hooks/useInput";
+import {gql} from "apollo-boost";
 import Input from "./Input";
-import { Instagram, Compass, HeartEmpty, User } from "./Icons";
+import { Instagram, Compass, HeartEmpty, User} from "./Icons";
+import {useQuery} from "react-apollo-hooks";
+
 
 
 const Header = styled.header`
@@ -59,29 +62,47 @@ const HeaderLink = styled(Link)`
      margin-right:30px;
     }
 `
+const ME = gql`
+  {
+    me {
+      username
+    }
+  }
+`;
 
-export default ()=>{
-  const search= useInput("");
-  
-  return (<Header>
+export default withRouter(({ history }) => {
+    const search = useInput("");
+    const meQuery = useQuery(ME);
+    console.log(meQuery);
+    const onSearchSubmit = e => {
+      e.preventDefault();
+      history.push(`/search?term=${search.value}`);
+    };
+    return (
+      <Header>
         <HeaderWrapper>
-                       <HeaderColumn> <Link to="/"><Instagram/></Link></HeaderColumn>
-                       <HeaderColumn>  
-                             <form>
-                                <SearchInput {...search} placeholder = "Search"/>
-                            </form>
-                        </HeaderColumn>
-                        <HeaderColumn>
-                            <HeaderLink to="/explore">
-                                <Compass/>
-                            </HeaderLink>
-                            <HeaderLink to="/notifications">
-                                <HeartEmpty/>
-                            </HeaderLink>
-                            <HeaderLink to = "/username">
-                                <User />
-                            </HeaderLink>
-                        </HeaderColumn>
-            </HeaderWrapper>
-         </Header>)
-}
+          <HeaderColumn>
+            <Link to="/">
+              <Instagram />
+            </Link>
+          </HeaderColumn>
+          <HeaderColumn>
+            <form onSubmit={onSearchSubmit}>
+              <SearchInput {...search} placeholder="Search" />
+            </form>
+          </HeaderColumn>
+          <HeaderColumn>
+            <HeaderLink to="/explore">
+              <Compass />
+            </HeaderLink>
+            <HeaderLink to="/notifications">
+              <HeartEmpty />
+            </HeaderLink>
+            <HeaderLink to="/username">
+              <User />
+            </HeaderLink>
+          </HeaderColumn>
+        </HeaderWrapper>
+      </Header>
+    );
+  });
