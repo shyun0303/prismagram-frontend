@@ -12,6 +12,7 @@ export default () => {
   const lastName = useInput("");
   const email = useInput("");
   const secret = useInput("");
+ /*=========================================================*/
   const requestSecretMutation = useMutation(LOG_IN, {
 
     variables: { email: email.value }
@@ -31,7 +32,7 @@ export default () => {
      }
   })
   const localLogInMutation = useMutation(LOCAL_LOG_IN);
-
+/*=========================================================*/
   const onSubmit = async(e) => {
     e.preventDefault();
     if (action === "logIn") {
