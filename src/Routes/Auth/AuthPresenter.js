@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
+import Helmet from "react-helmet";
 
 const Wrapper = styled.div`
   min-height: 80vh;
@@ -59,11 +60,18 @@ export default ({
   <Wrapper>
     <Form>
       {action === "logIn" && (
+        <>
+        <Helmet>
+          <title>로그인 | 세현스타그램</title>
+        </Helmet>
         <form onSubmit={onSubmit}>
           <Input placeholder={"Email"} {...email} type="email" />
           <Button text={"Log in"} />
         </form>
+        </>
       )}{action === "signUp" && (
+        <>
+        <Helmet><title>회원가입</title></Helmet>
         <form onSubmit={onSubmit}>
           <Input placeholder={"First name"} {...firstName} />
           <Input placeholder={"Last name"} {...lastName} />
@@ -71,11 +79,17 @@ export default ({
           <Input placeholder={"Username"} {...username} />
           <Button text={"Sign up"} />
         </form>
+        </>
       )}
-      {action === "confirm" && <form onSubmit ={onSubmit}>
+      {action === "confirm" && (
+      <>
+      <Helmet><title>비밀 코드 확인</title></Helmet>
+      <form onSubmit ={onSubmit}>
         <Input placeholder="비밀 코드 입력" required {...secret}/>
         <Button text={"확인"} />
-      </form>}
+      </form>
+      </>
+      )}
     </Form>
    {action!=="confirm" && ( <StateChanger>
       {action === "logIn" ? (

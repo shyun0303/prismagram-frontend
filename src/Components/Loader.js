@@ -20,4 +20,4 @@ const Loader = styled.div`
 export default ()=>
 <Loader>
     <Instagram size={36}/>
-    </Loader>
+</Loader>
