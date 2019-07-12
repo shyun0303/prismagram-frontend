@@ -10,6 +10,8 @@ ${props=>props.theme.whiteBox};
 width:100%;
 max-width:600px;
 margin-bottom:25px;
+user-select: none;
+
 `;
 
 const Header = styled.header`
@@ -98,7 +100,8 @@ export default ({user:
     likeCount,
     createdAt,
     newComment,
-    currentItem
+    currentItem,
+    toggleLike
 })=>(
     <Post>
     <Header>
@@ -113,7 +116,7 @@ export default ({user:
     </Files>
     <Meta>
     <Buttons>
-        <Button>
+        <Button onClick={toggleLike}>
             {isLiked ? <HeartFull/> : <HeartEmpty/>}
         </Button>
         <Button>
