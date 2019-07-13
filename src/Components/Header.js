@@ -6,6 +6,7 @@ import {gql} from "apollo-boost";
 import Input from "./Input";
 import { Instagram, Compass, HeartEmpty, User} from "./Icons";
 import {useQuery} from "react-apollo-hooks";
+import { ME } from "../SharedQueries";
 
 
 
@@ -63,13 +64,6 @@ const HeaderLink = styled(Link)`
      margin-right:30px;
     }
 `
-const ME = gql`
-  {
-    me {
-      username
-    }
-  }
-`;
 
 export default withRouter(({ history }) => {
     const search = useInput("");
@@ -89,7 +83,9 @@ export default withRouter(({ history }) => {
           </HeaderColumn>
           <HeaderColumn>
             <form onSubmit={onSearchSubmit}>
-              <SearchInput {...search} placeholder="Search" />
+              <SearchInput value={search.value}
+               placeholder="Search"
+              onChange={search.onChange} />
             </form>
           </HeaderColumn>
           <HeaderColumn>
