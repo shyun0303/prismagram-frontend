@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { HeartFull, Comment, CommentFull } from "./Icons";
+import { HeartFull, CommentFull } from "./Icons";
+import Popup from "reactjs-popup";
 
-
+const PopupExample = () => (
+    <Popup trigger={<button> Trigger</button>} EventType="click" position="right center">
+      <div>Popup content here !!</div>
+    </Popup>
+  );
 const Overlay = styled.div`
     background-color: rgba(0,0,0,0,6);
     width:100%;
@@ -66,7 +71,7 @@ const SquarePost = ({likeCount, commentCount, file})=>(
 SquarePost.propTypes={
     likeCount:PropTypes.number.isRequired,
     commentCount:PropTypes.number.isRequired,
-    file:PropTypes.string.isRequired
+    file:PropTypes.object.isRequired
 }
 
 export default SquarePost;
