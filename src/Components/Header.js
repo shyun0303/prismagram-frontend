@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import {Link, withRouter} from "react-router-dom";
 import useInput from "../Hooks/useInput";
-import {gql} from "apollo-boost";
 import Input from "./Input";
 import { Instagram, Compass, HeartEmpty, User} from "./Icons";
 import {useQuery} from "react-apollo-hooks";
